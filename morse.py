@@ -1,7 +1,7 @@
 from gpiozero import LED
 import time
 # Python program to implement Morse Code Translator
-# Text to morse from Geeks4geeks
+ 
 '''
 VARIABLE KEY
 'cipher' -> 'stores the morse translated form of the english string'
@@ -46,7 +46,47 @@ def encrypt(message):
             cipher += ' '
  
     return cipher
-
+ 
+# Function to decrypt the string
+# from morse to english
+def decrypt(message):
+ 
+    # extra space added at the end to access the
+    # last morse code
+    message += ' '
+ 
+    decipher = ''
+    citext = ''
+    for letter in message:
+ 
+        # checks for space
+        if (letter != ' '):
+ 
+            # counter to keep track of space
+            i = 0
+ 
+            # storing morse code of a single character
+            citext += letter
+ 
+        # in case of space
+        else:
+            # if i = 1 that indicates a new character
+            i += 1
+ 
+            # if i = 2 that indicates a new word
+            if i == 2 :
+ 
+                 # adding space to separate words
+                decipher += ' '
+            else:
+ 
+                # accessing the keys using their values (reverse of encryption)
+                decipher += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT
+                .values()).index(citext)]
+                citext = ''
+ 
+    return decipher
+ 
 # Hard-coded driver function to run the program
 def main():
     with open('text.txt', 'r') as reader:
@@ -57,7 +97,7 @@ def main():
         results = encrypt(results)
         print(results)
 
-        pause = 60/750 # 60/(dit per word / wpm) --> 60/(50 *15)
+        pause = 0.08 # Should be half of sleep, formula: Time in ms = 1200/wpm
             
         led = LED(18)
 
@@ -68,7 +108,7 @@ def main():
                 led.on()
                 time.sleep(pause)
                 led.off()
-                time.sleep(pause)
+#                print('.', end='')
             
             if(char == '-'):
                 led.on()
@@ -76,18 +116,14 @@ def main():
                 time.sleep(pause)
                 time.sleep(pause)
                 led.off()
-                time.sleep(pause)
+#                print('-', end='')
 
             if(char == ' '):
                 time.sleep(pause)
                 time.sleep(pause)
                 time.sleep(pause)
-		time.sleep(pause)
-                time.sleep(pause)
-                time.sleep(pause)
-                time.sleep(pause)
+#                print(' ', end='')
 
-            if(char == 
 
 # Executes the main function
 if __name__ == '__main__':
