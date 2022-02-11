@@ -87,7 +87,6 @@ def main():
                 time.sleep(pause)
                 time.sleep(pause)
 
-            if(char == 
 
 # Executes the main function
 if __name__ == '__main__':
