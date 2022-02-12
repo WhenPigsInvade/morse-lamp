@@ -12,7 +12,7 @@ jobq = Queue(maxsize = 10)
 async def morse(ctx, *, txt):
     await ctx.send(encrypt(str(txt)))
 
-@bit.command()
+@bot.command()
 async def lamp(ctx):
     if(jobq.full()):
         await ctx.send("Job queue is full, please try again later")
