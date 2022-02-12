@@ -92,7 +92,7 @@ def main(morse_code):
             time.sleep(pause)
 
 def job():
-    while true:
+    while True:
         if jobq.empty() is False:
            main(jobq.get())
 
