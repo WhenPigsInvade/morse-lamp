@@ -9,17 +9,19 @@ bot = commands.Bot(command_prefix='!')
 jobq = Queue(maxsize = 10)
 
 @bot.command()
-async def morse(ctx, *, txt):
-    await ctx.send(encrypt(str(txt)))
+async def morse(ctx):
+    await ctx.send(encrypt(ctx.message.content[6:]))
 
-@bot.command()
+@bit.command()
 async def lamp(ctx):
     if(jobq.full()):
         await ctx.send("Job queue is full, please try again later")
     
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
-        main(encrypt(ctx.message.content[5:]))
+        text = encrypt(ctx.message.content[5:])
+        jobq.put(text)
+        #main(encrypt(ctx.message.content[5:]))
         await ctx.send("Added to queue: "+ ctx.message.content)
 
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
@@ -66,6 +68,7 @@ def main(morse_code):
 
     for char in morse_code:
 
+
         if(char == '.'):
             led.on()
             time.sleep(pause)
@@ -89,8 +92,17 @@ def main(morse_code):
             time.sleep(pause)
             time.sleep(pause)
 
-    
+def job():
+    while true:
+        if(!jobq.empty():
+           main(jobq.get())
+
+job_thread = threading.Thread(target=job)
+
+job_thread.start()
+
 #main_thread = threading.Thread(target=main)
+
 with open("token.txt", "r") as file:
     token = file.read().splitlines()[0].strip()
 bot.run(token)
