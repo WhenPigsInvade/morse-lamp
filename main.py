@@ -8,6 +8,11 @@ from queue import Queue
 bot = commands.Bot(command_prefix='!')
 jobq = Queue(maxsize = 10)
 
+filter = ""
+with open("filter.txt", "r") as filter_file:
+    filter = filter_file.read()
+    filter = filter.lower()
+
 @bot.command()
 async def morse(ctx):
     await ctx.send(encrypt(ctx.message.content[6:]))
@@ -19,10 +24,23 @@ async def lamp(ctx):
     
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
-        text = encrypt(ctx.message.content[5:])
-        jobq.put(text)
-        #main(encrypt(ctx.message.content[5:]))
-        await ctx.send("Added to queue: "+ ctx.message.content)
+        text = ctx.message.content[5:]
+        blocked = filter(text.lower().split())
+        if blocked == "":
+            text = encrypt(text)
+            jobq.put(text)
+            #main(encrypt(ctx.message.content[5:]))
+            await ctx.send("Added to queue: "+ ctx.message.content[5:])
+        
+        else:
+            await ctx.send("Word blocked: "+ blocked)
+        
+def filter(text):
+    blocked = ""
+    for word in text:
+        if(filter.__contains__(word))
+            blocked = word
+    return blocked
 
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     'C':'-.-.', 'D':'-..', 'E':'.',
