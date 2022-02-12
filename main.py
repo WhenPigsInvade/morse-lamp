@@ -12,13 +12,14 @@ jobq = Queue(maxsize = 10)
 async def morse(ctx, *, txt):
     await ctx.send(encrypt(str(txt)))
 
+@bit.command()
 async def lamp(ctx):
     if(jobq.full()):
         await ctx.send("Job queue is full, please try again later")
     
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
-        main(encrypt(ctx.message.content[6:]))
+        main(encrypt(ctx.message.content[5:]))
         await ctx.send("Added to queue: "+ ctx.message.content)
 
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
@@ -62,9 +63,8 @@ def main(morse_code):
     pause = 60/750 # 60/(dit per word / wpm) --> 60/(50 *15)
         
     led = LED(18)
-    # TODO: define results
-    for char in results:
 
+    for char in morse_code:
 
         if(char == '.'):
             led.on()
