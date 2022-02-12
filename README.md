@@ -10,6 +10,8 @@ Discord Bot which translate text and flashes morse code from a LED lamp.
 ## Introduction
 Morse-lamp takes input from a Discord text channel and uses GPIO on Raspberry Pi to output morse code.
 
+Special thanks to Geeks4Geeks for the Text-Morse code translation code
+
 ## Installation
 To run Morse-lamp you will need a Raspberry Pi with GPIO Pins
 
