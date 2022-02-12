@@ -93,4 +93,6 @@ def main(morse_code):
     
 #main_thread = threading.Thread(target=main)
 
-bot.run('OTQxNzg5MzcyNjYyMDMwMzk2.YgbDtA.Ehp61Wr_zbu7J6YrKlwv8hE2ahg')
+with open("token.txt", "r") as file:
+    token = file.read().splitlines()[0].strip()
+bot.run(token)
