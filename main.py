@@ -9,8 +9,8 @@ bot = commands.Bot(command_prefix='!')
 jobq = Queue(maxsize = 10)
 
 @bot.command()
-async def morse(ctx):
-    await ctx.send(encrypt(ctx.message.content[6:]))
+async def morse(ctx, *, txt):
+    await ctx.send(encrypt(str(txt)))
 
 async def lamp(ctx):
     if(jobq.full()):
@@ -18,7 +18,7 @@ async def lamp(ctx):
     
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
-        main(encrypt(ctx.message.content[6:])
+        main(encrypt(ctx.message.content[6:]))
         await ctx.send("Added to queue: "+ ctx.message.content)
 
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
@@ -62,7 +62,7 @@ def main(morse_code):
     pause = 60/750 # 60/(dit per word / wpm) --> 60/(50 *15)
         
     led = LED(18)
-
+    # TODO: define results
     for char in results:
 
 
@@ -91,5 +91,6 @@ def main(morse_code):
 
     
 #main_thread = threading.Thread(target=main)
-
-bot.run('OTQxNzg5MzcyNjYyMDMwMzk2.YgbDtA.Ehp61Wr_zbu7J6YrKlwv8hE2ahg')
+with open("token.txt", "r") as file:
+    token = file.read().splitlines()[0].strip()
+bot.run(token)
