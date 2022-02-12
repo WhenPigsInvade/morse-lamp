@@ -94,7 +94,7 @@ def main(morse_code):
 
 def job():
     while true:
-        if(!jobq.empty():
+        if jobq.empty() is False:
            main(jobq.get())
 
 job_thread = threading.Thread(target=job)
