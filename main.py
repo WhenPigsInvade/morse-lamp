@@ -8,10 +8,10 @@ from queue import Queue
 bot = commands.Bot(command_prefix='!')
 jobq = Queue(maxsize = 10)
 
-filter = ""
+filtered = ""
 with open("filter.txt", "r") as filter_file:
-    filter = filter_file.read()
-    filter = filter.lower()
+    filtered = filter_file.read()
+    filtered = filter.lower()
 
 @bot.command()
 async def morse(ctx):
@@ -38,7 +38,7 @@ async def lamp(ctx):
 def filter(text):
     blocked = ""
     for word in text:
-        if(filter.__contains__(word))
+        if(filtered.__contains__(word))
             blocked = word
     return blocked
 
