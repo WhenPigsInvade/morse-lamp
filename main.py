@@ -26,21 +26,21 @@ async def lamp(ctx):
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
         text = ctx.message.content[5:]
-        blocked = filter(text.lower().split())
-        if blocked == "":
+        blocked = filter(text)
+        if not blocked:
             text = encrypt(text)
             jobq.put(text)
             #main(encrypt(ctx.message.content[5:]))
             await ctx.send("Added to queue: "+ ctx.message.content[5:])
         
         else:
-            await ctx.send("Word blocked: "+ blocked)
+            await ctx.send(f"Word blocked: {blocked}")
         
 def filter(text, threshold:float = 0.65):
     for blocked_word in filtered:
         # For each set of letters of text with length of blockedWord
         for i in range(len(text)-len(blocked_word)+1):
-            word = re.sub(r'\s', text[i:i+len(blocked_word)], '').lower()
+            word = re.sub(r"\s", "", str(text[i : i + len(blocked_word)])).lower()
             # Get the number of letters that match
             matches = sum(c1 == c2 for c1, c2 in zip(word, blocked_word))
             
