@@ -11,7 +11,7 @@ job_queue = Queue(maxsize=10)
 filtered = set()
 with open("filter.txt", "r") as file:
     for word in file.readlines():
-        filtered.add(word)
+        filtered.add(word.strip())
 
 
 @bot.command()
@@ -38,8 +38,8 @@ async def lamp(ctx, *, message):
 
 def filter(text):
     blocked = ""
-    for word in text.split(" "):
-        if filtered.contains(word):
+    for word in text:
+        if(word in filtered):
             blocked = word
     return blocked
 
