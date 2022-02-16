@@ -36,7 +36,7 @@ async def lamp(ctx):
         else:
             await ctx.send(f"Word blocked: {blocked}")
         
-def filter(text, threshold:float = 0.65):
+def filter(text, threshold:float = 0.85):
     for blocked_word in filtered:
         # For each set of letters of text with length of blockedWord
         for i in range(len(text)-len(blocked_word)+1):
