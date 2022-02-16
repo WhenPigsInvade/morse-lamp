@@ -89,7 +89,7 @@ def encrypt(message):
 
 # Hard-coded driver function to run the program
 def main(morse_code):
-    pause = 60/750 # 60/(dit per word / wpm) --> 60/(50 *15)
+    pause = 60/500 # 60/(dit per word / wpm) --> 60/(50 *10)
         
     led = LED(18)
 
