@@ -26,9 +26,11 @@ async def lamp(ctx):
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
         text = ctx.message.content[5:]
+        text = re.sub(' +', ' ', text)
         blocked = filter(text)
         if not blocked:
             text = encrypt(text)
+            text.replace('  ', '|')
             jobq.put(text)
             #main(encrypt(ctx.message.content[5:]))
             await ctx.send("Added to queue: "+ ctx.message.content[5:])
@@ -109,6 +111,9 @@ def main(morse_code):
 
         if(char == ' '):
             time.sleep(pause)
+            time.sleep(pause)
+            
+        if(char == '|'):
             time.sleep(pause)
             time.sleep(pause)
             time.sleep(pause)
