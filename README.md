@@ -38,4 +38,5 @@ Currently Morse-lamp only has the following commands
 Text filter list and message recipt when message is broadcasted will be added soon.
 
 ## Change log
+2/15/2021 - Filter added
 2/11/2021 - Initial Release
