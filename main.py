@@ -15,17 +15,17 @@ with open("filter.txt", "r") as file:
         filtered.add(word)
 
 @bot.command()
-async def morse(ctx,*,message):
-    await ctx.send(encrypt(message)
+async def morse(ctx):
+    await ctx.send(encrypt(ctx.message.content[7:]))
 
 @bot.command()
-async def lamp(ctx,*,message):
+async def lamp(ctx):
     if(jobq.full()):
         await ctx.send("Job queue is full, please try again later")
     
     else:
 #        jobq.put(encrypt(ctx.message.content[6:]))
-        text = message
+        text = ctx.message.content[6:]
         text = re.sub(' +', ' ', text)
         blocked = filter(text)
         if not blocked:
