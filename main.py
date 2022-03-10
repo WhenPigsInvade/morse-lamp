@@ -34,18 +34,32 @@ async def lamp(ctx):
             text.replace('  ', '|')
             jobq.put(text)
             #main(encrypt(ctx.message.content[5:]))
-            await ctx.send("Added to queue: "+ ctx.message.content[5:])
+            await ctx.send("Added to queue: "+ ctx.message.content[6:])
         
         else:
             await ctx.send(f"Word blocked: {blocked}")
             
+#NOTE: This is realy bad form. Considering merging lamp() and schedule()
 @bot.command()
 async def schedule(ctx):
+        if(schedulerq.full())
+            await ctx.send("Job queue is full, please try again later")
         
         
+    else:
+#        jobq.put(encrypt(ctx.message.content[6:]))
+        text = (ctx.message.content[6:ctx.message.content.find(' ')], ctx.message.content[ctx.message.content.find(' '):])
+        text[1] = re.sub(' +', ' ', text[1])
+        blocked = filter(text[1])
+        if not blocked:
+            text[1] = encrypt(text[1])
+            text[1].replace('  ', '|')
+            scheduleq.put(text)
+            #main(encrypt(ctx.message.content[5:]))
+            await ctx.send("Added to queue: "+ ctx.message.content[ctx.message.content.find(' '):])
         
-        
-        
+        else:
+            await ctx.send(f"Word blocked: {blocked}")
         
         
         
@@ -135,6 +149,7 @@ def main(morse_code):
 
 def job():
     while True:
+        
         if jobq.empty() is False:
            main(jobq.get())
 
