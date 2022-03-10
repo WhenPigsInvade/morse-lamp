@@ -8,6 +8,7 @@ from queue import Queue
 
 bot = commands.Bot(command_prefix='!')
 jobq = Queue(maxsize = 10)
+scheduleq = Queue(maxsize = 10)
 
 filtered = set()
 with open("filter.txt", "r") as file:
@@ -37,6 +38,17 @@ async def lamp(ctx):
         
         else:
             await ctx.send(f"Word blocked: {blocked}")
+            
+@bot.command()
+async def schedule(ctx):
+        
+        
+        
+        
+        
+        
+        
+        
         
 def filter(text, threshold:float = 0.85):
     for blocked_word in filtered:
