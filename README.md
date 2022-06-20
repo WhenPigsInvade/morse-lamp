@@ -12,6 +12,11 @@ Morse-lamp takes input from a Discord text channel and uses GPIO on Raspberry Pi
 
 Special thanks to Geeks4Geeks for the Text-Morse code translation code
 
+Morse Lamp in action
+
+[![Morse lamp](https://img.youtube.com/vi/4_udniLn8Vw/0.jpg)](https://youtube.com/shorts/4_udniLn8Vw)
+
+
 ## Installation
 To run Morse-lamp you will need a Raspberry Pi with GPIO Pins
 
